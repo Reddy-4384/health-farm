@@ -1,0 +1,360 @@
+* {
+  box-sizing: border-box;
+}
+
+.farmer-market-page {
+  min-height: 100vh;
+  background: #f1f5f2;
+  color: #263c33;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.farmer-market-header {
+  background: #244638;
+  padding: 0 35px;
+}
+
+.farmer-market-top {
+  min-height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.farmer-market-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.farmer-market-brand img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.farmer-market-brand h2 {
+  color: white;
+  font-size: 22px;
+  margin: 0;
+}
+
+.farmer-market-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.farmer-market-user button {
+  background: white;
+  color: #244638;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.farmer-market-user button:hover {
+  background: #edf3e7;
+}
+
+/* NAVIGATION */
+.farmer-market-nav {
+  background: #172e26;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 -35px;
+}
+
+.farmer-market-nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.farmer-market-nav a:hover,
+.farmer-market-nav a.active {
+  background: #315b48;
+}
+
+/* MAIN */
+.farmer-market-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px 22px 50px;
+}
+
+.farmer-market-heading {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.farmer-market-heading h1 {
+  color: #244638;
+  font-size: 30px;
+  margin: 0 0 8px;
+}
+
+.farmer-market-heading p {
+  color: #718078;
+  margin: 0;
+}
+
+/* NOTICE */
+.farmer-market-notice {
+  background: #fff8e8;
+  border-left: 4px solid #d49b30;
+  padding: 15px 18px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+}
+
+.farmer-market-notice strong {
+  color: #805b13;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.farmer-market-notice p {
+  color: #766747;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* SEARCH AND FILTER */
+.farmer-market-controls {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.farmer-market-controls input,
+.farmer-market-controls select {
+  height: 45px;
+  padding: 0 14px;
+  border: 1px solid #d8e3da;
+  border-radius: 6px;
+  outline: none;
+  background: white;
+  color: #344d40;
+  font-size: 14px;
+}
+
+.farmer-market-controls input {
+  flex: 1;
+  min-width: 0;
+}
+
+.farmer-market-controls select {
+  width: 230px;
+}
+
+.farmer-market-controls input:focus,
+.farmer-market-controls select:focus {
+  border-color: #4f8063;
+}
+
+/* PRICE GRID */
+.farmer-market-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.farmer-market-card {
+  background: white;
+  padding: 22px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(25, 60, 42, 0.06);
+  border: 1px solid #edf0eb;
+}
+
+.farmer-market-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.farmer-market-card-top > span:first-child {
+  color: #718078;
+  font-size: 12px;
+  background: #edf3ee;
+  padding: 6px 10px;
+  border-radius: 20px;
+}
+
+.farmer-market-trend {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.farmer-market-trend.up {
+  color: #168044;
+}
+
+.farmer-market-trend.down {
+  color: #d9534f;
+}
+
+.farmer-market-trend.stable {
+  color: #718078;
+}
+
+.farmer-market-card h2 {
+  color: #244638;
+  font-size: 21px;
+  margin: 20px 0 10px;
+}
+
+.farmer-market-price {
+  color: #244638;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.farmer-market-price small {
+  color: #718078;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.farmer-market-location {
+  color: #45594c;
+  font-size: 14px;
+  margin-top: 18px;
+}
+
+.farmer-market-location span {
+  font-weight: bold;
+}
+
+.farmer-market-description {
+  color: #89958c;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+/* EMPTY STATE */
+.farmer-market-empty {
+  background: white;
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.farmer-market-empty h3 {
+  color: #244638;
+}
+
+.farmer-market-empty p {
+  color: #718078;
+}
+
+/* INFORMATION */
+.farmer-market-info {
+  background: white;
+  padding: 22px;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: 1px solid #edf0eb;
+}
+
+.farmer-market-info h3 {
+  color: #244638;
+  margin-top: 0;
+}
+
+.farmer-market-info p {
+  color: #718078;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* FOOTER */
+.farmer-market-footer {
+  min-height: 40px;
+  background: #244638;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 950px) {
+  .farmer-market-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .farmer-market-header {
+    padding: 0 18px;
+  }
+
+  .farmer-market-nav {
+    margin: 0 -18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .farmer-market-user {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .farmer-market-user button {
+    padding: 8px 12px;
+  }
+
+  .farmer-market-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .farmer-market-nav a {
+    padding: 14px 12px;
+  }
+
+  .farmer-market-controls {
+    flex-direction: column;
+  }
+
+  .farmer-market-controls select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .farmer-market-user span {
+    display: none;
+  }
+
+  .farmer-market-container {
+    padding: 25px 14px 40px;
+  }
+
+  .farmer-market-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .farmer-market-heading h1 {
+    font-size: 25px;
+  }
+}

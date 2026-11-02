@@ -1,0 +1,350 @@
+* {
+  box-sizing: border-box;
+}
+
+.farmer-sales-page {
+  min-height: 100vh;
+  background: #f1f5f2;
+  color: #263c33;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.farmer-sales-header {
+  background: #244638;
+  padding: 0 35px;
+}
+
+.farmer-sales-top {
+  min-height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.farmer-sales-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.farmer-sales-brand img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.farmer-sales-brand h2 {
+  color: white;
+  font-size: 22px;
+  margin: 0;
+}
+
+.farmer-sales-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.farmer-sales-user button {
+  background: white;
+  color: #244638;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.farmer-sales-user button:hover {
+  background: #edf3e7;
+}
+
+/* NAVIGATION */
+.farmer-sales-nav {
+  background: #172e26;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 -35px;
+}
+
+.farmer-sales-nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.farmer-sales-nav a:hover,
+.farmer-sales-nav a.active {
+  background: #315b48;
+}
+
+/* MAIN */
+.farmer-sales-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px 22px 50px;
+}
+
+.farmer-sales-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.farmer-sales-heading h1 {
+  color: #244638;
+  font-size: 30px;
+  margin: 0 0 8px;
+}
+
+.farmer-sales-heading p {
+  color: #718078;
+  margin: 0;
+}
+
+/* SUMMARY */
+.farmer-sales-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.farmer-sales-stat {
+  background: white;
+  padding: 22px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(25, 60, 42, 0.06);
+}
+
+.farmer-sales-stat span {
+  color: #718078;
+  font-size: 13px;
+}
+
+.farmer-sales-stat h2 {
+  color: #244638;
+  margin: 12px 0 0;
+  font-size: 23px;
+  overflow-wrap: anywhere;
+}
+
+/* SALES SECTION */
+.farmer-sales-section > h2 {
+  color: #244638;
+  margin-bottom: 18px;
+  font-size: 22px;
+}
+
+/* EMPTY STATE */
+.farmer-sales-empty {
+  background: white;
+  border-radius: 12px;
+  padding: 55px 20px;
+  text-align: center;
+}
+
+.farmer-sales-empty div {
+  font-size: 55px;
+}
+
+.farmer-sales-empty h3 {
+  color: #244638;
+}
+
+.farmer-sales-empty p {
+  color: #718078;
+}
+
+.farmer-sales-empty a {
+  display: inline-block;
+  margin-top: 12px;
+  background: #244638;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 7px;
+  text-decoration: none;
+}
+
+/* SALES LIST */
+.farmer-sales-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.farmer-sales-card {
+  background: white;
+  border-radius: 10px;
+  padding: 22px;
+  box-shadow: 0 2px 8px rgba(25, 60, 42, 0.06);
+}
+
+.farmer-sales-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #edf0eb;
+}
+
+.farmer-sales-card-header span:first-child {
+  color: #718078;
+  font-size: 12px;
+}
+
+.farmer-sales-card-header h3 {
+  color: #244638;
+  margin: 6px 0;
+}
+
+.farmer-sales-card-header p {
+  color: #718078;
+  font-size: 13px;
+  margin: 0;
+}
+
+.farmer-sales-status {
+  background: #fff2d9;
+  color: #986500;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* BUYER */
+.farmer-sales-buyer {
+  padding: 16px 0;
+  color: #45594c;
+  font-size: 14px;
+}
+
+/* PRODUCTS */
+.farmer-sales-product {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf0eb;
+}
+
+.farmer-sales-product img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #edf3e9;
+}
+
+.farmer-sales-product-info {
+  flex: 1;
+}
+
+.farmer-sales-product-info h4 {
+  color: #244638;
+  margin: 0 0 7px;
+}
+
+.farmer-sales-product-info p {
+  color: #718078;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.farmer-sales-item-total {
+  color: #244638;
+  font-size: 16px;
+}
+
+/* TOTAL */
+.farmer-sales-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  font-weight: 600;
+}
+
+.farmer-sales-total strong {
+  color: #244638;
+  font-size: 19px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 950px) {
+  .farmer-sales-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .farmer-sales-header {
+    padding: 0 18px;
+  }
+
+  .farmer-sales-nav {
+    margin: 0 -18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .farmer-sales-user {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .farmer-sales-user button {
+    padding: 8px 12px;
+  }
+
+  .farmer-sales-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .farmer-sales-nav a {
+    padding: 14px 12px;
+  }
+
+  .farmer-sales-product {
+    flex-wrap: wrap;
+  }
+
+  .farmer-sales-card {
+    padding: 15px;
+  }
+
+  .farmer-sales-card-header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .farmer-sales-user span {
+    display: none;
+  }
+
+  .farmer-sales-container {
+    padding: 25px 14px 40px;
+  }
+
+  .farmer-sales-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .farmer-sales-heading h1 {
+    font-size: 25px;
+  }
+}

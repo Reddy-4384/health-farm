@@ -1,0 +1,273 @@
+
+.browse-page {
+  min-height: 100vh;
+  background: #f2f6f3;
+  color: #263f35;
+  font-family: Arial, sans-serif;
+}
+
+.bp-header {
+  min-height: 70px;
+  background: #263f35;
+  color: white;
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.bp-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.bp-logo img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+}
+
+.bp-search {
+  display: flex;
+  flex: 1;
+  max-width: 430px;
+}
+
+.bp-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.bp-search button {
+  background: #dce9df;
+  color: #263f35;
+  border: none;
+  padding: 0 17px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.bp-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: bold;
+}
+
+.bp-user button {
+  background: white;
+  color: #263f35;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bp-navbar {
+  background: #182a23;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bp-navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 20px;
+  font-size: 14px;
+}
+
+.bp-navbar a:hover,
+.bp-navbar a.active {
+  background: #263f35;
+}
+
+.bp-content {
+  max-width: 1250px;
+  min-height: calc(100vh - 160px);
+  margin: auto;
+  padding: 38px;
+}
+
+.bp-content h1 {
+  color: #263f35;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.bp-subtitle {
+  color: #68776f;
+  margin-bottom: 25px;
+}
+
+.bp-product-info {
+  margin-bottom: 20px;
+  color: #53665c;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.bp-message {
+  padding: 12px;
+  margin-bottom: 18px;
+  background: #e6f1e9;
+  color: #24613d;
+  border-radius: 6px;
+}
+
+.bp-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.bp-product-card {
+  background: white;
+  border: 1px solid #d7e2dc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(30, 60, 45, 0.06);
+  transition: transform 0.2s;
+}
+
+.bp-product-card:hover {
+  transform: translateY(-4px);
+}
+
+.bp-product-image {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  background: #e9f0eb;
+}
+
+.bp-product-details {
+  padding: 18px;
+}
+
+.bp-verified {
+  display: inline-block;
+  background: #e0f2e4;
+  color: #21743c;
+  border-radius: 20px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.bp-product-details h2 {
+  color: #263f35;
+  font-size: 21px;
+  margin: 13px 0;
+}
+
+.bp-product-details p {
+  color: #5e6d64;
+  font-size: 13px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.bp-product-details strong {
+  color: #263f35;
+}
+
+.bp-product-details button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #176348;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bp-product-details button:hover {
+  background: #104b36;
+}
+
+.bp-product-details button:disabled {
+  background: #89958d;
+  cursor: not-allowed;
+}
+
+.bp-no-products {
+  background: white;
+  text-align: center;
+  padding: 55px 20px;
+  border: 1px solid #d7e2dc;
+  border-radius: 10px;
+}
+
+.bp-no-products h2 {
+  color: #263f35;
+  margin-bottom: 12px;
+}
+
+.bp-no-products p {
+  color: #68776f;
+}
+
+.bp-footer {
+  min-height: 45px;
+  background: #182a23;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .bp-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bp-header {
+    flex-wrap: wrap;
+  }
+
+  .bp-search {
+    order: 3;
+    max-width: none;
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .bp-product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bp-content {
+    padding: 22px 15px;
+  }
+
+  .bp-header {
+    padding: 12px 15px;
+  }
+
+  .bp-logo {
+    font-size: 18px;
+  }
+
+  .bp-user span {
+    display: none;
+  }
+
+  .bp-navbar a {
+    padding: 12px;
+  }
+}

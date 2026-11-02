@@ -1,0 +1,383 @@
+* {
+  box-sizing: border-box;
+}
+
+.farmer-orders-page {
+  min-height: 100vh;
+  background: #f1f5f2;
+  color: #263c33;
+  font-family: Arial, sans-serif;
+}
+
+/* HEADER */
+.farmer-orders-header {
+  background: #244638;
+  padding: 0 35px;
+}
+
+/* TOP ROW */
+.farmer-orders-top {
+  min-height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.farmer-orders-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.farmer-orders-brand img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.farmer-orders-brand h2 {
+  color: white;
+  font-size: 22px;
+  margin: 0;
+}
+
+/* FARMER NAME AND LOGOUT */
+.farmer-orders-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.farmer-orders-user button {
+  background: white;
+  color: #244638;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.farmer-orders-user button:hover {
+  background: #edf3e7;
+}
+
+/* NAVIGATION */
+.farmer-orders-nav {
+  background: #172e26;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 -35px;
+}
+
+.farmer-orders-nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.farmer-orders-nav a:hover,
+.farmer-orders-nav a.active {
+  background: #315b48;
+  color: white;
+}
+
+/* MAIN CONTENT */
+.farmer-orders-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 35px 22px 50px;
+}
+
+.farmer-orders-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.farmer-orders-heading h1 {
+  color: #244638;
+  font-size: 30px;
+  margin: 0 0 8px;
+}
+
+.farmer-orders-heading p {
+  color: #718078;
+  margin: 0;
+}
+
+/* SUMMARY CARDS */
+.farmer-order-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.farmer-order-stat {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(25, 60, 42, 0.06);
+}
+
+.farmer-order-stat span {
+  color: #718078;
+  font-size: 13px;
+}
+
+.farmer-order-stat h2 {
+  color: #244638;
+  margin: 12px 0 0;
+  font-size: 23px;
+  overflow-wrap: anywhere;
+}
+
+/* EMPTY STATE */
+.farmer-orders-empty {
+  background: white;
+  border-radius: 12px;
+  padding: 55px 20px;
+  text-align: center;
+}
+
+.farmer-orders-empty div {
+  font-size: 55px;
+}
+
+.farmer-orders-empty h2 {
+  color: #244638;
+}
+
+.farmer-orders-empty p {
+  color: #718078;
+}
+
+.farmer-orders-empty a {
+  display: inline-block;
+  margin-top: 12px;
+  background: #244638;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 7px;
+  text-decoration: none;
+}
+
+/* ORDER LIST */
+.farmer-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.farmer-order-card {
+  background: white;
+  border-radius: 10px;
+  padding: 22px;
+  box-shadow: 0 2px 8px rgba(25, 60, 42, 0.06);
+}
+
+/* ORDER HEADER */
+.farmer-order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid #edf0eb;
+}
+
+.farmer-order-card-header span:first-child {
+  color: #718078;
+  font-size: 12px;
+}
+
+.farmer-order-card-header h3 {
+  color: #244638;
+  margin: 6px 0;
+}
+
+.farmer-order-card-header p {
+  color: #718078;
+  font-size: 13px;
+  margin: 0;
+}
+
+.farmer-order-main-status {
+  background: #fff2d9;
+  color: #986500;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* BUYER DETAILS */
+.farmer-order-buyer {
+  padding: 16px 0;
+  color: #45594c;
+  font-size: 14px;
+}
+
+.farmer-order-buyer span {
+  color: #718078;
+  margin-left: 5px;
+}
+
+/* PRODUCT DETAILS */
+.farmer-order-product {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf0eb;
+}
+
+.farmer-order-product img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #edf3e9;
+}
+
+.farmer-order-product-info {
+  flex: 1;
+}
+
+.farmer-order-product-info h4 {
+  color: #244638;
+  margin: 0 0 7px;
+}
+
+.farmer-order-product-info p {
+  color: #718078;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+/* FULFILMENT STATUS */
+.farmer-item-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.farmer-item-status label {
+  font-size: 12px;
+  color: #45594c;
+  font-weight: bold;
+}
+
+.farmer-item-status select {
+  padding: 10px;
+  border: 1px solid #d8e3da;
+  border-radius: 6px;
+  background: white;
+  color: #244638;
+  outline: none;
+}
+
+/* ORDER TOTAL */
+.farmer-order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  font-weight: 600;
+}
+
+.farmer-order-total strong {
+  color: #244638;
+  font-size: 19px;
+}
+
+/* RESPONSIVE TABLET */
+@media (max-width: 950px) {
+  .farmer-order-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 800px) {
+  .farmer-orders-header {
+    padding: 0 18px;
+  }
+
+  .farmer-orders-nav {
+    margin: 0 -18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .farmer-orders-top {
+    gap: 10px;
+  }
+
+  .farmer-orders-brand h2 {
+    font-size: 18px;
+  }
+
+  .farmer-orders-user {
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  .farmer-orders-user button {
+    padding: 8px 12px;
+  }
+
+  .farmer-orders-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .farmer-orders-nav a {
+    padding: 14px 12px;
+  }
+
+  .farmer-order-product {
+    flex-wrap: wrap;
+  }
+
+  .farmer-item-status {
+    width: 100%;
+  }
+
+  .farmer-order-card {
+    padding: 15px;
+  }
+
+  .farmer-order-card-header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .farmer-orders-user span {
+    display: none;
+  }
+
+  .farmer-orders-container {
+    padding: 25px 14px 40px;
+  }
+
+  .farmer-order-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .farmer-orders-heading h1 {
+    font-size: 25px;
+  }
+}

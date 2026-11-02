@@ -1,0 +1,349 @@
+
+.ar-page {
+  min-height: 100vh;
+  background: #f1f6f3;
+  font-family: Arial, sans-serif;
+  color: #29483d;
+}
+
+.ar-header {
+  min-height: 65px;
+  padding: 10px 40px;
+  background: #23483b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.ar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ar-brand img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+}
+
+.ar-brand h2 {
+  margin: 0;
+  font-size: 23px;
+}
+
+.ar-admin {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.ar-admin span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ar-admin button {
+  padding: 10px 18px;
+  background: white;
+  color: #29483d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ar-navbar {
+  min-height: 51px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #142f27;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ar-navbar a {
+  flex: 1;
+  padding: 17px 15px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.ar-navbar a:hover,
+.ar-navbar a.active {
+  background: #315d4e;
+}
+
+.ar-content {
+  max-width: 1100px;
+  margin: auto;
+  padding: 38px 30px;
+}
+
+.ar-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.ar-heading h1 {
+  margin: 0 0 6px;
+  font-size: 29px;
+}
+
+.ar-heading p {
+  margin: 0;
+  color: #718078;
+  font-size: 15px;
+}
+
+.ar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.ar-card {
+  background: white;
+  border: 1px solid #d3e1d8;
+  border-radius: 11px;
+  padding: 25px 15px;
+  text-align: center;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.04);
+}
+
+.ar-icon {
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+
+.ar-card h3 {
+  margin: 0 0 10px;
+  color: #687970;
+  font-size: 14px;
+}
+
+.ar-card h2 {
+  margin: 0;
+  color: #29483d;
+  font-size: 29px;
+}
+
+.ar-sales-card {
+  margin-top: 25px;
+  padding: 25px;
+  background: white;
+  border: 1px solid #d3e1d8;
+  border-radius: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.04);
+}
+
+.ar-sales-card h2 {
+  margin: 0 0 7px;
+  font-size: 20px;
+}
+
+.ar-sales-card p {
+  margin: 0;
+  color: #718078;
+  font-size: 14px;
+}
+
+.ar-sales-card h1 {
+  margin: 0;
+  color: #29483d;
+  font-size: 30px;
+}
+
+.ar-summary-card {
+  margin-top: 25px;
+  padding: 25px;
+  background: white;
+  border: 1px solid #d3e1d8;
+  border-radius: 11px;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.04);
+}
+
+.ar-summary-card h2 {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 21px;
+}
+
+.ar-summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 5px;
+  border-bottom: 1px solid #e9eeeb;
+  font-size: 14px;
+}
+
+.ar-summary-row:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 800px) {
+  .ar-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .ar-header {
+    padding: 10px 15px;
+  }
+
+  .ar-brand h2 {
+    font-size: 19px;
+  }
+
+  .ar-admin {
+    gap: 10px;
+  }
+
+  .ar-admin span {
+    font-size: 12px;
+  }
+
+  .ar-admin button {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .ar-navbar {
+    justify-content: flex-start;
+  }
+
+  .ar-navbar a {
+    flex: 0 0 auto;
+    padding: 17px 15px;
+  }
+
+  .ar-content {
+    padding: 30px 15px;
+  }
+
+  .ar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ar-sales-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+
+/* DOWNLOAD BUTTONS */
+.ar-download-section {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.ar-download-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.csv-btn {
+  background: #23483b;
+  color: white;
+}
+
+.pdf-btn {
+  background: #e8f1eb;
+  color: #23483b;
+  border: 1px solid #23483b;
+}
+
+.ar-download-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.ar-report-date {
+  text-align: right;
+  color: #718078;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.ar-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: #718078;
+  font-size: 12px;
+}
+
+/* PDF PRINT DESIGN */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .ar-page {
+    background: white !important;
+  }
+
+  .ar-content {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .ar-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .ar-card,
+  .ar-sales-card,
+  .ar-summary-card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+
+  .ar-heading {
+    margin-bottom: 20px;
+  }
+
+  .ar-footer {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ar-download-section {
+    flex-direction: column;
+  }
+
+  .ar-download-btn {
+    width: 100%;
+  }
+}
+

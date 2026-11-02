@@ -1,11 +1,18 @@
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useSearchParams
+} from "react-router-dom";
 import "./BrowseProducts.css";
 
 function readStorage(key, fallback) {
   try {
-    const value = JSON.parse(localStorage.getItem(key) || "null");
+    const value = JSON.parse(
+      localStorage.getItem(key) || "null"
+    );
+
     return value ?? fallback;
   } catch {
     return fallback;
@@ -17,7 +24,9 @@ function formatDate(date) {
 
   const parsed = new Date(date);
 
-  if (Number.isNaN(parsed.getTime())) return String(date);
+  if (Number.isNaN(parsed.getTime())) {
+    return String(date);
+  }
 
   return parsed.toLocaleDateString("en-IN", {
     day: "2-digit",
@@ -29,28 +38,34 @@ function formatDate(date) {
 function BrowseProducts() {
   const navigate = useNavigate();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [buyer, setBuyer] = useState(null);
   const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(
+    searchParams.get("search") || ""
+  );
   const [message, setMessage] = useState("");
 
+  // LOAD BUYER AND PRODUCTS
   useEffect(() => {
     const user = readStorage("currentUser", null);
 
-    if (!user || user.role !== "buyer") {
+    if (!user || user.role?.toLowerCase() !== "buyer") {
       navigate("/", { replace: true });
       return;
     }
 
     const usersData = readStorage("health_farm_users", {});
+
     const users = Array.isArray(usersData)
       ? usersData
-      : Object.values(usersData);
+      : Object.values(usersData || {});
 
     const profile = users.find(
       item =>
         item.userId === user.userId &&
-        item.role === "buyer"
+        item.role?.toLowerCase() === "buyer"
     );
 
     setBuyer({
@@ -69,10 +84,21 @@ function BrowseProducts() {
     };
   }, [navigate]);
 
-  function loadProducts() {
-    const allProducts = readStorage("health_farm_products", []);
+  // SYNC SEARCH WITH URL
+  useEffect(() => {
+    setSearch(searchParams.get("search") || "");
+  }, [searchParams]);
 
-    const approved = (Array.isArray(allProducts) ? allProducts : [])
+  // LOAD APPROVED PRODUCTS
+  function loadProducts() {
+    const allProducts = readStorage(
+      "health_farm_products",
+      []
+    );
+
+    const approved = (
+      Array.isArray(allProducts) ? allProducts : []
+    )
       .filter(product => product.status === "approved")
       .sort((a, b) => {
         const dateA = new Date(
@@ -89,6 +115,7 @@ function BrowseProducts() {
     setProducts(approved);
   }
 
+  // SEARCH FILTER
   const filteredProducts = products.filter(product => {
     const searchText = search.trim().toLowerCase();
 
@@ -101,8 +128,25 @@ function BrowseProducts() {
     );
   });
 
+  // SEARCH BUTTON
+  function handleSearch(e) {
+    e.preventDefault();
+
+    const value = search.trim();
+
+    if (value) {
+      setSearchParams({ search: value });
+    } else {
+      setSearchParams({});
+    }
+  }
+
+  // ADD TO CART
   function addToCart(productId) {
-    const allProducts = readStorage("health_farm_products", []);
+    const allProducts = readStorage(
+      "health_farm_products",
+      []
+    );
 
     const product = allProducts.find(
       item =>
@@ -133,7 +177,7 @@ function BrowseProducts() {
     const existingIndex = cart.findIndex(
       item =>
         String(item.productId) === String(product.id) &&
-        item.buyerId === buyer.userId
+        item.buyerId === buyer?.userId
     );
 
     if (existingIndex !== -1) {
@@ -141,7 +185,9 @@ function BrowseProducts() {
       const currentQuantity = Number(existing.quantity) || 0;
 
       if (currentQuantity >= availableQuantity) {
-        setMessage("You cannot add more than the available quantity.");
+        setMessage(
+          "You cannot add more than the available quantity."
+        );
         return;
       }
 
@@ -165,8 +211,8 @@ function BrowseProducts() {
         quantity: 1,
         location: product.location,
         image: product.image || "/logo.png",
-        buyerId: buyer.userId,
-        buyerName: buyer.name,
+        buyerId: buyer?.userId,
+        buyerName: buyer?.name,
         addedAt: new Date().toISOString()
       });
     }
@@ -177,12 +223,17 @@ function BrowseProducts() {
         JSON.stringify(cart)
       );
 
-      setMessage(`${product.product} added to cart successfully!`);
+      setMessage(
+        `${product.product} added to cart successfully!`
+      );
     } catch {
-      setMessage("Unable to save your cart. Please try again.");
+      setMessage(
+        "Unable to save your cart. Please try again."
+      );
     }
   }
 
+  // LOGOUT
   function logout() {
     if (window.confirm("Are you sure you want to logout?")) {
       localStorage.removeItem("currentUser");
@@ -193,6 +244,7 @@ function BrowseProducts() {
   return (
     <div className="browse-page">
 
+      {/* HEADER */}
       <header className="bp-header">
 
         <div className="bp-logo">
@@ -200,7 +252,7 @@ function BrowseProducts() {
           <span>Health Farm</span>
         </div>
 
-        <div className="bp-search">
+        <form className="bp-search" onSubmit={handleSearch}>
           <input
             type="search"
             placeholder="Search products..."
@@ -211,10 +263,10 @@ function BrowseProducts() {
             }}
           />
 
-          <button onClick={() => setSearch(search.trim())}>
+          <button type="submit">
             Search
           </button>
-        </div>
+        </form>
 
         <div className="bp-user">
           <span>{buyer?.name || "Buyer"}</span>
@@ -223,6 +275,7 @@ function BrowseProducts() {
 
       </header>
 
+      {/* NAVIGATION */}
       <nav className="bp-navbar">
         <Link to="/buyer">Home</Link>
         <Link to="/buyer/products" className="active">Products</Link>
@@ -231,6 +284,7 @@ function BrowseProducts() {
         <Link to="/buyer/profile">Profile</Link>
       </nav>
 
+      {/* MAIN CONTENT */}
       <main className="bp-content">
 
         <h1>Browse Products</h1>
@@ -258,7 +312,10 @@ function BrowseProducts() {
 
             {filteredProducts.map(product => (
 
-              <article className="bp-product-card" key={product.id}>
+              <article
+                className="bp-product-card"
+                key={product.id}
+              >
 
                 <img
                   className="bp-product-image"
@@ -324,6 +381,17 @@ function BrowseProducts() {
                 ? "No approved products match your search."
                 : "There are currently no approved products available."}
             </p>
+
+            {search.trim() && (
+              <button
+                onClick={() => {
+                  setSearch("");
+                  setSearchParams({});
+                }}
+              >
+                Clear Search
+              </button>
+            )}
           </div>
 
         )}

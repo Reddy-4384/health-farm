@@ -6,7 +6,7 @@ import "./FarmerDashboard.css";
 function FarmerDashboard() {
   const navigate = useNavigate();
 
-  const [farmer, setFarmer] = useState(
+  const [farmer] = useState(
     JSON.parse(localStorage.getItem("currentUser") || "null")
   );
 
@@ -24,16 +24,24 @@ function FarmerDashboard() {
       localStorage.getItem("health_farm_orders") || "[]"
     );
 
+    const productList = Array.isArray(savedProducts)
+      ? savedProducts
+      : [];
+
+    const orderList = Array.isArray(savedOrders)
+      ? savedOrders
+      : [];
+
     setProducts(
-      savedProducts.filter(
-        (product) => product.farmerId === farmerId
+      productList.filter(
+        product => product.farmerId === farmerId
       )
     );
 
     setOrders(
-      savedOrders.filter((order) =>
+      orderList.filter(order =>
         order.items?.some(
-          (item) => item.farmerId === farmerId
+          item => item.farmerId === farmerId
         )
       )
     );
@@ -55,20 +63,23 @@ function FarmerDashboard() {
     };
   }, [farmerId]);
 
-  const farmerOrderItems = orders.flatMap((order) =>
+  const farmerOrderItems = orders.flatMap(order =>
     (order.items || [])
-      .filter((item) => item.farmerId === farmerId)
-      .map((item) => ({ ...item, orderId: order.id || order.orderId }))
+      .filter(item => item.farmerId === farmerId)
+      .map(item => ({
+        ...item,
+        orderId: order.id || order.orderId
+      }))
   );
 
   const totalProducts = products.length;
 
   const approvedProducts = products.filter(
-    (product) => product.status === "approved"
+    product => product.status === "approved"
   ).length;
 
   const pendingProducts = products.filter(
-    (product) => product.status === "pending"
+    product => product.status === "pending"
   ).length;
 
   const totalOrders = orders.length;
@@ -84,39 +95,49 @@ function FarmerDashboard() {
     0
   );
 
-  const handleLogout = () => {
-    localStorage.removeItem("currentUser");
-    navigate("/");
-  };
-
   const recentOrders = [...orders]
     .sort(
       (a, b) =>
-        new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+        new Date(b.createdAt || 0) -
+        new Date(a.createdAt || 0)
     )
     .slice(0, 5);
+
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem("currentUser");
+      navigate("/");
+    }
+  };
 
   return (
     <div className="fd-page">
 
-      {/* Header */}
+      {/* HEADER */}
       <header className="fd-header">
+
         <div className="fd-brand">
-            <img
-                src="/logo.png"
-                alt="Health Farm Logo"
-                className="fd-logo"
-            />
-        <h2>Health Farm</h2>
+          <img
+            src="/logo.png"
+            alt="Health Farm Logo"
+            className="fd-logo"
+          />
+          <h2>Health Farm</h2>
         </div>
 
         <div className="fd-user">
-          <span>Welcome, {farmer?.name || "Farmer"}</span>
-          <button onClick={handleLogout}>Logout</button>
+          <span>
+            {farmer?.name || "Farmer"} 👨‍🌾
+          </span>
+
+          <button onClick={handleLogout}>
+            Logout
+          </button>
         </div>
+
       </header>
 
-      {/* Navigation */}
+      {/* NAVIGATION */}
       <nav className="fd-navbar">
         <Link to="/farmer" className="active">Home</Link>
         <Link to="/farmer/add-product">My Products</Link>
@@ -126,23 +147,22 @@ function FarmerDashboard() {
         <Link to="/farmer/profile">Profile</Link>
       </nav>
 
-      {/* Main Content */}
+      {/* MAIN CONTENT */}
       <main className="fd-content">
 
         <section className="fd-welcome">
-          <div>
-            <h1>Farmer Dashboard</h1>
-            <p>
-              Manage your products, track orders and monitor your sales.
-            </p>
-          </div>
+          <h1>Farmer Dashboard</h1>
+
+          <p>
+            Manage your products, track orders and monitor your sales.
+          </p>
 
           <Link to="/farmer/add-product" className="fd-add-btn">
             + Add New Product
           </Link>
         </section>
 
-        {/* Statistics */}
+        {/* STATISTICS */}
         <section className="fd-stats">
 
           <div className="fd-stat-card">
@@ -195,11 +215,13 @@ function FarmerDashboard() {
 
         </section>
 
-        {/* Quick Actions */}
+        {/* QUICK ACTIONS */}
         <section className="fd-section">
+
           <h2>Quick Actions</h2>
 
           <div className="fd-actions">
+
             <Link to="/farmer/add-product">
               <span>➕</span>
               <div>
@@ -231,25 +253,32 @@ function FarmerDashboard() {
                 <p>Check sample crop prices</p>
               </div>
             </Link>
+
           </div>
         </section>
 
-        {/* Recent Orders */}
+        {/* RECENT ORDERS */}
         <section className="fd-section">
+
           <div className="fd-section-heading">
             <h2>Recent Orders</h2>
             <Link to="/farmer/orders">View All</Link>
           </div>
 
           {recentOrders.length === 0 ? (
+
             <div className="fd-empty">
               <span>📭</span>
               <h3>No orders yet</h3>
               <p>Your customer orders will appear here.</p>
             </div>
+
           ) : (
+
             <div className="fd-table-wrapper">
+
               <table className="fd-table">
+
                 <thead>
                   <tr>
                     <th>Order ID</th>
@@ -261,17 +290,23 @@ function FarmerDashboard() {
 
                 <tbody>
                   {recentOrders.map((order, index) => {
+
                     const myItems = (order.items || []).filter(
-                      (item) => item.farmerId === farmerId
+                      item => item.farmerId === farmerId
                     );
 
                     return (
                       <tr key={order.id || order.orderId || index}>
                         <td>{order.id || order.orderId || "N/A"}</td>
+
                         <td>{order.buyerName || "Buyer"}</td>
+
                         <td>
-                          {myItems.map((item) => item.product).join(", ")}
+                          {myItems
+                            .map(item => item.product)
+                            .join(", ")}
                         </td>
+
                         <td>
                           <span className="fd-status">
                             {order.status || "Pending"}
@@ -281,9 +316,12 @@ function FarmerDashboard() {
                     );
                   })}
                 </tbody>
+
               </table>
+
             </div>
           )}
+
         </section>
 
       </main>

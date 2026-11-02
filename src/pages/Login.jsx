@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
+// Default demo accounts
 const initialAccounts = {
   ADMIN001: {
-    password: "admin123",
+    password: "admin143",
     role: "admin",
     name: "System Admin",
     phone: "",
@@ -15,6 +16,7 @@ const initialAccounts = {
     image: "",
     createdAt: "2026-01-01T00:00:00.000Z"
   },
+
   FARM001: {
     password: "farmer123",
     role: "farmer",
@@ -26,6 +28,7 @@ const initialAccounts = {
     image: "",
     createdAt: "2026-01-01T00:00:00.000Z"
   },
+
   BUY001: {
     password: "buyer123",
     role: "buyer",
@@ -39,6 +42,7 @@ const initialAccounts = {
   }
 };
 
+// Load users from Local Storage
 function loadUsers() {
   let users = {};
 
@@ -61,6 +65,9 @@ function loadUsers() {
       });
     }
   });
+
+  // Always update the default Admin password
+  users.ADMIN001.password = "admin143";
 
   localStorage.setItem(
     "health_farm_users",
@@ -97,12 +104,14 @@ function Login() {
     confirmPassword: ""
   });
 
+  // Switch between Login and Signup
   function switchTab(value) {
     setTab(value);
     setLoginMessage("");
     setSignupMessage("");
   }
 
+  // Login function
   function handleLogin(e) {
     e.preventDefault();
 
@@ -119,6 +128,7 @@ function Login() {
       user.role === role
     ) {
       setMessageColor("#168044");
+
       setLoginMessage(
         `Login successful! Welcome, ${user.name}.`
       );
@@ -137,12 +147,14 @@ function Login() {
       }, 800);
     } else {
       setMessageColor("#d9534f");
+
       setLoginMessage(
         "Invalid User ID, Password or Role."
       );
     }
   }
 
+  // Farmer image upload
   function handleImage(e) {
     const file = e.target.files[0];
 
@@ -174,6 +186,7 @@ function Login() {
     reader.readAsDataURL(file);
   }
 
+  // Signup function
   function handleSignup(e) {
     e.preventDefault();
 
@@ -191,12 +204,28 @@ function Login() {
 
     const id = userId.trim();
 
+    // Only Farmer and Buyer can register
+    if (role !== "farmer" && role !== "buyer") {
+      setSignupMessage("Invalid registration role.");
+      setMessageColor("#d9534f");
+      return;
+    }
+
+    // Check Farm Size for Farmers
+    if (role === "farmer" && !farmSize.trim()) {
+      setSignupMessage("Please enter your farm size.");
+      setMessageColor("#d9534f");
+      return;
+    }
+
+    // Check passwords
     if (password !== confirmPassword) {
       setSignupMessage("Passwords do not match!");
       setMessageColor("#d9534f");
       return;
     }
 
+    // Farmer image required
     if (role === "farmer" && !selectedImage) {
       setSignupMessage("Please upload a farmer image.");
       setMessageColor("#d9534f");
@@ -205,6 +234,7 @@ function Login() {
 
     const users = loadUsers();
 
+    // Check duplicate User ID
     if (users[id]) {
       setSignupMessage(
         "User ID already exists. Try logging in."
@@ -213,6 +243,7 @@ function Login() {
       return;
     }
 
+    // Save account
     users[id] = {
       password,
       role,
@@ -220,7 +251,7 @@ function Login() {
       phone: phone.trim(),
       email: email.trim(),
       location: location.trim(),
-      farmSize: farmSize.trim(),
+      farmSize: role === "farmer" ? farmSize.trim() : "",
       image: role === "farmer" ? selectedImage : "",
       createdAt: new Date().toISOString()
     };
@@ -261,6 +292,7 @@ function Login() {
   return (
     <div className="login-page">
 
+      {/* Left Banner */}
       <section className="left-section">
         <img
           src="/banner.png"
@@ -269,9 +301,11 @@ function Login() {
         />
       </section>
 
+      {/* Right Section */}
       <section className="right-section">
         <div className="login-card">
 
+          {/* Brand */}
           <div className="brand">
             <img
               src="/logo.png"
@@ -283,6 +317,7 @@ function Login() {
             <p>Farm-to-Fork Ecosystem</p>
           </div>
 
+          {/* Tabs */}
           <div className="auth-tabs">
             <button
               type="button"
@@ -309,6 +344,7 @@ function Login() {
             </button>
           </div>
 
+          {/* LOGIN FORM */}
           {tab === "login" ? (
             <form onSubmit={handleLogin}>
 
@@ -373,6 +409,8 @@ function Login() {
               </p>
             </form>
           ) : (
+
+            /* SIGNUP FORM */
             <form onSubmit={handleSignup}>
 
               <div className="form-group">
@@ -455,22 +493,26 @@ function Login() {
                 />
               </div>
 
-              <div className="form-group">
-                <label>Farm Size</label>
-                <input
-                  type="text"
-                  placeholder="Example: 5 Acres"
-                  required
-                  value={signupData.farmSize}
-                  onChange={(e) =>
-                    setSignupData({
-                      ...signupData,
-                      farmSize: e.target.value
-                    })
-                  }
-                />
-              </div>
+              {/* Farm Size - Only Farmer */}
+              {signupData.role === "farmer" && (
+                <div className="form-group">
+                  <label>Farm Size</label>
+                  <input
+                    type="text"
+                    placeholder="Example: 5 Acres"
+                    required
+                    value={signupData.farmSize}
+                    onChange={(e) =>
+                      setSignupData({
+                        ...signupData,
+                        farmSize: e.target.value
+                      })
+                    }
+                  />
+                </div>
+              )}
 
+              {/* Register As */}
               <div className="form-group">
                 <label>Register As</label>
                 <select
@@ -478,17 +520,22 @@ function Login() {
                   onChange={(e) => {
                     setSignupData({
                       ...signupData,
-                      role: e.target.value
+                      role: e.target.value,
+                      farmSize:
+                        e.target.value === "farmer"
+                          ? signupData.farmSize
+                          : ""
                     });
+
                     setSelectedImage("");
                   }}
                 >
                   <option value="farmer">Farmer</option>
                   <option value="buyer">Buyer</option>
-                  <option value="admin">Admin</option>
                 </select>
               </div>
 
+              {/* Farmer Image - Only Farmer */}
               {signupData.role === "farmer" && (
                 <div className="form-group">
                   <label>Farmer Image</label>

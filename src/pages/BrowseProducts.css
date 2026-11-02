@@ -271,3 +271,51 @@
     padding: 12px;
   }
 }
+
+/* SHARED BUYER HEADER RESPONSIVE DESIGN */
+
+.bp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.bp-search {
+  flex: 1;
+  max-width: 540px;
+  display: flex;
+  min-width: 200px;
+}
+
+.bp-search input {
+  flex: 1;
+  min-width: 0;
+}
+
+.bp-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+@media (max-width: 750px) {
+  .bp-header {
+    padding: 12px 15px;
+  }
+
+  .bp-search {
+    order: 3;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+
+  .bp-user span {
+    display: none;
+  }
+
+  .bp-navbar {
+    justify-content: flex-start;
+  }
+}

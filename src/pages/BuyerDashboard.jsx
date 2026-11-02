@@ -1,7 +1,11 @@
 
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 import "./BuyerDashboard.css";
+import "./BrowseProducts.css";
 
 function BuyerDashboard() {
   const navigate = useNavigate();
@@ -25,15 +29,23 @@ function BuyerDashboard() {
       localStorage.getItem("health_farm_orders") || "[]"
     );
 
+    const productList = Array.isArray(savedProducts)
+      ? savedProducts
+      : [];
+
+    const orderList = Array.isArray(savedOrders)
+      ? savedOrders
+      : [];
+
     setProducts(
-      savedProducts.filter(
-        (product) => product.status === "approved"
+      productList.filter(
+        product => product.status === "approved"
       )
     );
 
     setOrders(
-      savedOrders.filter(
-        (order) => order.buyerId === buyerId
+      orderList.filter(
+        order => order.buyerId === buyerId
       )
     );
   };
@@ -60,27 +72,32 @@ function BuyerDashboard() {
     (sum, order) =>
       sum +
       (order.items || []).reduce(
-        (itemSum, item) => itemSum + Number(item.quantity || 0),
+        (itemSum, item) =>
+          itemSum + Number(item.quantity || 0),
         0
       ),
     0
   );
 
   const totalSpending = orders.reduce(
-    (sum, order) => sum + Number(order.totalAmount || 0),
+    (sum, order) =>
+      sum + Number(order.totalAmount || 0),
     0
   );
 
   const recentOrders = [...orders]
     .sort(
       (a, b) =>
-        new Date(b.createdAt || 0) - new Date(a.createdAt || 0)
+        new Date(b.createdAt || 0) -
+        new Date(a.createdAt || 0)
     )
     .slice(0, 5);
 
   const handleLogout = () => {
-    localStorage.removeItem("currentUser");
-    navigate("/");
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem("currentUser");
+      navigate("/");
+    }
   };
 
   const handleSearch = (e) => {
@@ -94,34 +111,34 @@ function BuyerDashboard() {
   return (
     <div className="bd-page">
 
-      {/* HEADER */}
-      <header className="bd-header">
-        <div className="bd-brand">
-          <img src="/logo.png" alt="Health Farm Logo" />
-          <h2>Health Farm</h2>
+      {/* HEADER - SAME DESIGN AS PRODUCTS PAGE */}
+      <header className="bp-header">
+
+        <div className="bp-logo">
+          <img src="/logo.png" alt="Health Farm" />
+          <span>Health Farm</span>
         </div>
 
-        <button className="bd-logout" onClick={handleLogout}>
-          Logout
-        </button>
-      </header>
-
-      {/* SEARCH BAR */}
-      <div className="bd-search-row">
-        <form onSubmit={handleSearch} className="bd-search-form">
+        <form className="bp-search" onSubmit={handleSearch}>
           <input
-            type="text"
+            type="search"
             placeholder="Search products..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={e => setSearchTerm(e.target.value)}
           />
 
           <button type="submit">Search</button>
         </form>
-      </div>
+
+        <div className="bp-user">
+          <span>{buyer?.name || "Buyer"}</span>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+
+      </header>
 
       {/* NAVIGATION */}
-      <nav className="bd-navbar">
+      <nav className="bp-navbar">
         <Link to="/buyer" className="active">Home</Link>
         <Link to="/buyer/products">Products</Link>
         <Link to="/buyer/cart">Cart</Link>
@@ -134,6 +151,7 @@ function BuyerDashboard() {
 
         <section className="bd-welcome">
           <h1>Buyer Dashboard</h1>
+
           <p>
             Welcome to Health Farm! Buy fresh products directly from farmers.
           </p>
@@ -244,14 +262,17 @@ function BuyerDashboard() {
                   {recentOrders.map((order, index) => (
                     <tr key={order.id || order.orderId || index}>
                       <td>{order.id || order.orderId || "N/A"}</td>
+
                       <td>
                         {(order.items || [])
-                          .map((item) => item.product)
+                          .map(item => item.product)
                           .join(", ")}
                       </td>
+
                       <td>
                         ₹{Number(order.totalAmount || 0).toLocaleString("en-IN")}
                       </td>
+
                       <td>
                         <span className="bd-status">
                           {order.status || "Pending"}

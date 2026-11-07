@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AddProduct.css";
@@ -66,7 +65,10 @@ function AddProduct() {
       currentUser = null;
     }
 
-    if (!currentUser || currentUser.role !== "farmer") {
+    if (
+      !currentUser ||
+      currentUser.role?.toLowerCase() !== "farmer"
+    ) {
       navigate("/", { replace: true });
       return;
     }
@@ -315,11 +317,15 @@ function AddProduct() {
           Home
         </Link>
 
+        <Link to="/farmer/my-products">
+          My Products
+        </Link>
+
         <Link
           to="/farmer/add-product"
           className="active"
         >
-          My Products
+          Add Product
         </Link>
 
         <Link to="/farmer/orders">

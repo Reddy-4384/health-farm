@@ -140,7 +140,8 @@ function FarmerDashboard() {
       {/* NAVIGATION */}
       <nav className="fd-navbar">
         <Link to="/farmer" className="active">Home</Link>
-        <Link to="/farmer/add-product">My Products</Link>
+        <Link to="/farmer/my-products">My Products</Link>
+        <Link to="/farmer/add-product">Add Product</Link>
         <Link to="/farmer/orders">Orders</Link>
         <Link to="/farmer/sales">Sales</Link>
         <Link to="/farmer/market-prices">Market Prices</Link>
@@ -227,6 +228,14 @@ function FarmerDashboard() {
               <div>
                 <h3>Add Product</h3>
                 <p>Add your farm products</p>
+              </div>
+            </Link>
+
+            <Link to="/farmer/my-products">
+              <span>🌾</span>
+              <div>
+                <h3>My Products</h3>
+                <p>View and update your products</p>
               </div>
             </Link>
 

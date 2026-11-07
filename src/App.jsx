@@ -19,6 +19,7 @@ import AdminReports from "./pages/AdminReports";
 
 // FARMER PAGES
 import FarmerDashboard from "./pages/FarmerDashboard";
+import MyProducts from "./pages/MyProducts";
 import AddProduct from "./pages/AddProduct";
 import FarmerOrders from "./pages/FarmerOrders";
 import FarmerSales from "./pages/FarmerSales";
@@ -105,7 +106,6 @@ function App() {
           }
         />
 
-        {/* ADMIN REPORTS */}
         <Route
           path="/admin/reports"
           element={
@@ -122,6 +122,16 @@ function App() {
           element={
             <ProtectedDashboard role="farmer">
               <FarmerDashboard />
+            </ProtectedDashboard>
+          }
+        />
+
+        {/* NEW: MY PRODUCTS */}
+        <Route
+          path="/farmer/my-products"
+          element={
+            <ProtectedDashboard role="farmer">
+              <MyProducts />
             </ProtectedDashboard>
           }
         />
